@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>player</name>
+    <events>
+        <variable constant="0" name="AMMOCOUNT" sid="7466942721104381" static="0" type="number">6</variable>
+        <event-block sid="7365067531537247">
+            <conditions>
+                <condition id="-9" name="Layer is visible" sid="6077229902516633" type="System">
+                    <param id="0" name="Layer">&quot;Game&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="3" name="Set progress" sid="8406958957953433" type="ProgressBar">
+                    <param id="0" name="Value">AMMOCOUNT</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="8990605102376708">
+            <conditions>
+                <condition behavior="8Direction" id="0" name="Is moving" sid="1668016327709468" type="Player" />
+            </conditions>
+            <actions>
+                <action id="-7" name="Scroll to position" sid="2354265827159725" type="System">
+                    <param id="0" name="X">Player.X</param>
+                    <param id="1" name="Y">Player.Y</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-group description="" sid="7407759699552112" title="FireControl">
+            <sub-events>
+                <event-block sid="2420663636143009">
+                    <conditions>
+                        <condition id="0" name="On click" sid="499485610062257" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="4977482326327703" type="System">
+                            <param id="0" name="Group name">AMMOCOUNT &gt; 0 ? &quot;FireControl&quot;: &quot;Nothing&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="0" name="Spawn another object" sid="4274774998438025" type="Player">
+                            <param id="0" name="Object">eliteDart</param>
+                            <param id="1" name="Layer">&quot;Game&quot;</param>
+                            <param id="2" name="Image point">&quot;Barrel&quot;</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="2540604519870484" type="System">
+                            <param id="0" name="Group name">&quot;FireControl&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="0" name="Play" sid="8353483695961522" type="Audio">
+                            <param id="0" name="Audio file">shot</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;shot&quot;</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="6339352913076496" type="System">
+                            <param id="0" name="Seconds">0.5</param>
+                        </action>
+                        <action id="0" name="Play" sid="6368811103236315" type="Audio">
+                            <param id="0" name="Audio file">reload</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;reload&quot;</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="1979307995868126" type="System">
+                            <param id="0" name="Seconds">1.0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="1890137710720577" type="System">
+                            <param id="0" name="Group name">&quot;FireControl&quot;</param>
+                            <param id="1" name="State">2</param>
+                        </action>
+                        <action id="-11" name="Subtract from" sid="8490463942567296" type="System">
+                            <param id="0" name="Variable">AMMOCOUNT</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4826892795547035" type="System">
+                            <param id="0" name="Group name">AMMOCOUNT = 0 ? &quot;FireControl&quot;: &quot;Nothing&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-block sid="6325252468040595">
+            <conditions>
+                <condition id="-1" name="Every tick" sid="446513213614814" type="System" />
+            </conditions>
+            <actions>
+                <action id="-22" name="Set angle toward position" sid="994495473212752" type="Player">
+                    <param id="0" name="X">Mouse.X</param>
+                    <param id="1" name="Y">Mouse.Y - 50</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="5097568128197834">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="3704195544487663" type="Player">
+                    <param id="0" name="Object">Sprite</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Set Y" sid="4487983313986014" type="Sprite">
+                    <param id="0" name="Y">900</param>
+                </action>
+                <action id="0" name="Play" sid="2632488827040284" type="Audio">
+                    <param id="0" name="Audio file">pickup</param>
+                    <param id="2" name="Loop">0</param>
+                    <param id="3" name="Volume">0</param>
+                    <param id="1" name="Tag (optional)">&quot;pickup&quot;</param>
+                </action>
+                <action id="-12" name="Set group active" sid="8284549315362373" type="System">
+                    <param id="0" name="Group name">AMMOCOUNT = 0 ? &quot;FireControl&quot; :  &quot;Nothing&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-10" name="Add to" sid="7351574674169131" type="System">
+                    <param id="0" name="Variable">AMMOCOUNT</param>
+                    <param id="1" name="Value">10</param>
+                </action>
+                <action id="3" name="Set progress" sid="8730152844307794" type="ProgressBar">
+                    <param id="0" name="Value">AMMOCOUNT</param>
+                </action>
+                <action id="-16" name="Wait" sid="4234130914277459" type="System">
+                    <param id="0" name="Seconds">5</param>
+                </action>
+                <action id="-2" name="Set Y" sid="3336934350926594" type="Sprite">
+                    <param id="0" name="Y">480</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="6059387474463266">
+            <conditions />
+            <actions />
+        </event-block>
+    </events>
+</c2eventsheet>
